@@ -1,0 +1,231 @@
+
+/*禁止选中文本*/
+.no-select {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Chrome/Safari/Opera */
+  -khtml-user-select: none; /* Konqueror */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently not supported by any browser */
+}
+
+/*浮动*/
+.float-right {
+  float: right;
+}
+
+.float-left {
+  float: left;
+}
+
+/*清除浮动*/
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+
+/*滚动条自定义样式*/
+
+::-webkit-scrollbar { /*滚动条整体样式*/
+  width: 7px; /*高宽分别对应横竖滚动条的尺寸*/
+  height: 7px;
+}
+
+::-webkit-scrollbar-track { /*外层轨道*/
+  -webkit-box-shadow: inset 0 0 5px #e0e0e0;
+  border-radius: 0;
+  background-color: #e0e0e0;
+}
+
+::-webkit-scrollbar-thumb { /*滚动的滑块*/
+  border-radius: 0px;
+  -webkit-box-shadow: inset 0 0 5px #9e9e9e;
+  background-color: #9e9e9e;
+}
+
+::-webkit-scrollbar-thumb:hover { /*滚动的滑块 滑入样式*/
+  border-radius: 0px;
+  -webkit-box-shadow: inset 0 0 5px #757575;
+  background: #757575;
+}
+
+::-webkit-scrollbar-corner { /*边角*/
+  background-color: #e0e0e0;
+}
+
+/* 宽度高度 */
+
+.w-full {
+  width: 100% !important;
+}
+
+.h-full {
+  height: 100% !important;
+}
+
+.w-h-full {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* 字体颜色 */
+.color-white {
+  color: #FFF;
+}
+
+.color-red {
+  color: #ed4014;
+}
+
+.color-green {
+  color: #19be6b;
+}
+
+/* 外边距 */
+.m-t-5px {
+  margin-top: 5px;
+}
+
+.m-r-5px {
+  margin-right: 5px;
+}
+
+.m-b-5px {
+  margin-bottom: 5px;
+}
+
+.m-b-10px {
+  margin-bottom: 10px;
+}
+
+.m-l-5px {
+  margin-left: 5px;
+}
+
+.m-l-10px {
+  margin-left: 10px;
+}
+
+/* 动画相关样式 */
+
+
+/* 画布网格 */
+
+.canvas-grid-white-5px5px {
+  background:
+      linear-gradient(-90deg, rgba(255,255,255,0.2) 1px, transparent 1px) 0% 0% / 5px 5px,
+      linear-gradient(rgba(255,255,255,0.2) 1px, transparent 1px) 0% 0% / 5px 5px;
+}
+
+.canvas-grid-black-5px5px {
+  background:
+      linear-gradient(-90deg, rgba(0,0,0,0.2) 1px, transparent 1px) 0% 0% / 5px 5px,
+      linear-gradient(rgba(0,0,0,0.2) 1px, transparent 1px) 0% 0% / 5px 5px;
+}
+
+.canvas-grid-white-10px10px {
+  background:
+      linear-gradient(-90deg, rgba(255,255,255,0.2) 1px, transparent 1px) 0% 0% / 10px 10px,
+      linear-gradient(rgba(255,255,255,0.2) 1px, transparent 1px) 0% 0% / 10px 10px;
+}
+
+.canvas-grid-black-10px10px {
+  background:
+      linear-gradient(-90deg, rgba(0,0,0,0.2) 1px, transparent 1px) 0% 0% / 10px 10px,
+      linear-gradient(rgba(0,0,0,0.2) 1px, transparent 1px) 0% 0% / 10px 10px;
+}
+
+.canvas-grid-white-20px20px {
+  background:
+      linear-gradient(-90deg, rgba(255,255,255,0.2) 1px, transparent 1px) 0% 0% / 20px 20px,
+      linear-gradient(rgba(255,255,255,0.2) 1px, transparent 1px) 0% 0% / 20px 20px;
+}
+
+.canvas-grid-black-20px20px {
+  background:
+      linear-gradient(-90deg, rgba(0,0,0,0.2) 1px, transparent 1px) 0% 0% / 20px 20px,
+      linear-gradient(rgba(0,0,0,0.2) 1px, transparent 1px) 0% 0% / 20px 20px;
+}
+
+/* 拖拽放置相关样式 */
+.layout-item-drop-active {
+  background-color: rgba(0,0,0,0.5) !important;
+}
+.layout-item-drop-active * {
+  color: #fff !important;
+}
+.layout-item-drop-hover {
+  background-color: rgba(255,51,51,0.5) !important;
+}
+.layout-item-drop-hover * {
+  color: #fff !important;
+}
+
+/* 其他 */
+
+.shade {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  opacity: .1;
+  z-index: 2;
+}
+
+/* 动画延时 */
+.delay-0d5s {
+  -webkit-animation-delay: 0.5s;
+  animation-delay: 0.5s;
+}
+.delay-1d5s {
+  -webkit-animation-delay: 1.5s;
+  animation-delay: 1.5s;
+}
+.delay-2d5s {
+  -webkit-animation-delay: 2.5s;
+  animation-delay: 2.5s;
+}
+.delay-3d5s {
+  -webkit-animation-delay: 3.5s;
+  animation-delay: 3.5s;
+}
+.delay-4d5s {
+  -webkit-animation-delay: 4.5s;
+  animation-delay: 4.5s;
+}
+
+/* 快捷定位相关样式 */
+.h-center {
+  left: 50% !important;
+  transform: translateX(-50%);
+}
+
+.h-r {
+  left: inherit !important;
+  right: 0px;
+}
+
+.position-bottom {
+  top: inherit !important;
+  bottom: 0px;
+}
+
+.v-center {
+  top: 50% !important;
+  transform: translateY(-50%);
+}
+
+.position-right {
+  left: inherit !important;
+  right: 0px;
+}
+
+.h-v-center {
+  left: 50% !important;
+  top: 50% !important;
+  transform: translate(-50%, -50%);
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style type="text/css">
+    .progress {
+      width: 400px;
+      height: 80px;
+      background-image: linear-gradient(to right, rgb(16, 142, 233) 0%, rgb(135, 208, 104) 100%);
+      /* 指定动作 */
+      animation-duration: 1000ms;
+      animation-delay: 200ms;
+      animation-name: loadingToRight;
+    }
+
+    @keyframes loadingToRight {
+      to {
+        width: 400px;
+      }
+      from {
+        width: 0px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress"></div>
+  <script>
+    let obj = {
+      arr: [
+        {
+          id: '1',
+          name: 'huangjian'
+        },
+        {
+          id: '2',
+          name: 'huangkang'
+        }
+      ]
+    };
+
+    console.log(obj.arr.find(o => o.id=='1'));
+  </script>
+</body>
+</html>
