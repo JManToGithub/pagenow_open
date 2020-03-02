@@ -14,17 +14,7 @@
         paddingLeft: '310px',
         paddingRight: '340px'
       }" @click.stop.native="footerClickHandle">
-    <div :style="{float: 'left'}">
-      <Select size="small" v-model="canvasSize" prefix="md-tablet-landscape" style="width:150px"
-              :disabled="!pageMetadata.id" placeholder="画布尺寸" @on-change="canvasSizeChange">
-        <OptionGroup label="预设像素尺寸">
-          <Option v-for="item in $PnDict.canvasSizes2" :value="item.value" :key="item.value">{{ item.label }}</Option>
-        </OptionGroup>
-        <OptionGroup label="预设设备尺寸">
-          <Option v-for="item in $PnDict.canvasSizes" :value="item.value" :key="item.value">{{ item.label }}</Option>
-        </OptionGroup>
-      </Select>
-    </div>
+
     <div :style="{float: 'right'}">
 
     </div>
@@ -53,7 +43,6 @@
     },
     mounted() {
       if(this.pageMetadata.id) {
-        this.initCanvasSize();
       }
     },
     methods: {
@@ -61,45 +50,7 @@
         this.$EventBus.$emit('footerClick')
       },
 
-      initCanvasSize () {
-        if (this.pageMetadata.id) {
-          let width = this.pageMetadata.layout.layoutConfigData.width;
-          let widthPixelUnit = this.pageMetadata.layout.layoutConfigData.widthPixelUnit;
-          let height = this.pageMetadata.layout.layoutConfigData.height;
-          let heightPixelUnit = this.pageMetadata.layout.layoutConfigData.heightPixelUnit;
 
-          let flag = false;
-          let value = '';
-          let newCanvasSizes = this.$PnDict.canvasSizes.concat(this.$PnDict.canvasSizes2);
-
-          newCanvasSizes.forEach(item => {
-            let arr = item.value.split('*');
-            if(parseInt(arr[0]) == width && parseInt(arr[1]) == height && arr[2] == widthPixelUnit && arr[3] == heightPixelUnit) {
-              value = item.value;
-              flag = true
-            }
-          });
-
-          if(flag) {
-            this.canvasSize = value
-          }else {
-            this.canvasSize = ''
-          }
-        }else {
-          this.canvasSize = ''
-        }
-      },
-      canvasSizeChange (value) {
-        if (value) {
-          let arr = value.split('*');
-          let tmpPageMetadata = this.$PnUtil.deepClone(this.pageMetadata);
-          tmpPageMetadata.layout.layoutConfigData.width = parseInt(arr[0]);
-          tmpPageMetadata.layout.layoutConfigData.widthPixelUnit = arr[2];
-          tmpPageMetadata.layout.layoutConfigData.height = parseInt(arr[1]);
-          tmpPageMetadata.layout.layoutConfigData.heightPixelUnit = arr[3];
-          this.$store.commit('designer/setPageMetadata', tmpPageMetadata);
-        }
-      }
     },
     computed: {
       ...mapFields({
