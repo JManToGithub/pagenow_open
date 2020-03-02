@@ -140,7 +140,7 @@
        */
       layoutItemContextMenuClick (name) {
         let tmpLayoutItemId = this.$store.state.designer.currentSelectLayoutItemId;
-        let tmpLayoutItemIds = this.currentSelectLayoutItemIds.concat();
+
         // 删除布局块
         if (name == 'menu_delLayoutItem') {
           this.$Modal.confirm({
@@ -148,16 +148,11 @@
             content: '确认删除所选中的布局块吗？',
             onOk: () => {
               let layoutItemIds = [];
-              if(tmpLayoutItemIds.length > 0) {
-                layoutItemIds = tmpLayoutItemIds
-              }else {
-                layoutItemIds.pushNoRepeat(tmpLayoutItemId)
-              }
+              layoutItemIds.pushNoRepeat(tmpLayoutItemId)
               layoutItemIds.forEach(id => {
                 this.$store.commit('designer/deleteLayoutItem', id);
                 this.$store.commit('designer/setRightSidebarLayoutItemConfigFormName', '');
                 this.$store.commit('designer/setCurrentSelectLayoutItemId', '');
-                this.$store.commit('designer/setCurrentSelectLayoutItemIds', []);
                 this.$store.commit('designer/setRightSidebarFuncCompConfigFormName', '');
 
               });
@@ -171,11 +166,7 @@
             content: '确认解除所选中布局块的关联组件吗？',
             onOk: () => {
               let layoutItemIds = [];
-              if(tmpLayoutItemIds.length > 0) {
-                layoutItemIds = tmpLayoutItemIds
-              }else {
-                layoutItemIds.pushNoRepeat(tmpLayoutItemId)
-              }
+              layoutItemIds.pushNoRepeat(tmpLayoutItemId)
               layoutItemIds.forEach(id => {
                 this.$store.commit('designer/deleteComponentByLayoutItemId', id);
                 this.$store.commit('designer/setRightSidebarFuncCompConfigFormName', '')
@@ -226,26 +217,6 @@
 
         this.toggleLayoutItemXyLabel('block', left, top);
         // this.toggleLayoutItemSubline('block');
-
-        // 这段代码是为了在多选多个布局块的时候，同步移动其他布局块
-        if (this.$store.state.designer.currentSelectLayoutItemIds.length > 0) {
-          let currentLayoutItem = this.$store.getters['designer/getLayoutItemById'](this.tmpCurrentSelectLayoutItemId);
-
-          let offsetLeft = left - currentLayoutItem.layoutItemConfigData.left; // 左偏移
-          let offsetTop = top - currentLayoutItem.layoutItemConfigData.top; // 右偏移
-
-          let currentSelectLayoutItemIds = this.$store.state.designer.currentSelectLayoutItemIds;
-          if (currentSelectLayoutItemIds.length > 0) {
-            currentSelectLayoutItemIds.forEach(id => {
-              if (id != this.tmpCurrentSelectLayoutItemId) {
-                let otherLayoutItem = this.$store.getters['designer/getLayoutItemById'](id);
-                $('#drag-'+id).css('left', otherLayoutItem.layoutItemConfigData.left + offsetLeft);
-                $('#drag-'+id).css('top', otherLayoutItem.layoutItemConfigData.top + offsetTop);
-              }
-            });
-          }
-        }
-        // 这段代码是为了在多选多个布局块的时候，同步移动其他布局块 end
       },
 
       onLayoutItemDragStop (left, top) {
@@ -259,16 +230,6 @@
         let offsetTop = top - currentLayoutItem.layoutItemConfigData.top; // 右偏移
 
         this.$store.commit('designer/setLayoutItemLeftAndTop', {id: this.tmpCurrentSelectLayoutItemId, left: left, top: top});
-        let currentSelectLayoutItemIds = this.$store.state.designer.currentSelectLayoutItemIds;
-        if (currentSelectLayoutItemIds.length > 0) {
-          currentSelectLayoutItemIds.forEach(id => {
-            if (id != this.tmpCurrentSelectLayoutItemId) {
-              let otherLayoutItem = this.$store.getters['designer/getLayoutItemById'](id);
-              this.$store.commit('designer/setLayoutItemLeftAndTop',
-                {id: id, left: otherLayoutItem.layoutItemConfigData.left + offsetLeft, top: otherLayoutItem.layoutItemConfigData.top + offsetTop});
-            }
-          });
-        }
 
       },
 
@@ -325,81 +286,39 @@
       moveLayoutItem (direction) {
 
         if (direction == 'left') {
-          if(this.$store.state.designer.currentSelectLayoutItemIds.length > 0) {
-            this.$store.state.designer.currentSelectLayoutItemIds.forEach((id)=>{
-              this.$store.commit('designer/setLayoutItemLeftAndTopOffset', {
-                id: id,
-                direction: 'left',
-                offset: -this.layout.layoutConfigData.dragPixel
-              })
+          if(this.$store.state.designer.currentSelectLayoutItemId) {
+            this.$store.commit('designer/setLayoutItemLeftAndTopOffset', {
+              id: this.$store.state.designer.currentSelectLayoutItemId,
+              direction: 'left',
+              offset: -this.layout.layoutConfigData.dragPixel
             })
-          }else {
-            if(this.$store.state.designer.currentSelectLayoutItemId) {
-              this.$store.commit('designer/setLayoutItemLeftAndTopOffset', {
-                id: this.$store.state.designer.currentSelectLayoutItemId,
-                direction: 'left',
-                offset: -this.layout.layoutConfigData.dragPixel
-              })
-            }
           }
         } else if (direction == 'top') {
-          if(this.$store.state.designer.currentSelectLayoutItemIds.length > 0) {
-            this.$store.state.designer.currentSelectLayoutItemIds.forEach((id)=>{
-              this.$store.commit('designer/setLayoutItemLeftAndTopOffset', {
-                id: id,
+          if(this.$store.state.designer.currentSelectLayoutItemId) {
+            this.$store.commit('designer/setLayoutItemLeftAndTopOffset',
+              {
+                id: this.$store.state.designer.currentSelectLayoutItemId,
                 direction: 'top',
                 offset: -this.layout.layoutConfigData.dragPixel
-              })
-            })
-          }else {
-            if(this.$store.state.designer.currentSelectLayoutItemId) {
-              this.$store.commit('designer/setLayoutItemLeftAndTopOffset',
-                {
-                  id: this.$store.state.designer.currentSelectLayoutItemId,
-                  direction: 'top',
-                  offset: -this.layout.layoutConfigData.dragPixel
-                });
-            }
+              });
           }
         } else if (direction == 'right') {
-          if(this.$store.state.designer.currentSelectLayoutItemIds.length > 0) {
-            this.$store.state.designer.currentSelectLayoutItemIds.forEach((id)=>{
-              this.$store.commit('designer/setLayoutItemLeftAndTopOffset',
-                {
-                  id: id,
-                  direction: 'left',
-                  offset: +this.layout.layoutConfigData.dragPixel
-                });
-            })
-          }else {
-            if(this.$store.state.designer.currentSelectLayoutItemId) {
-              this.$store.commit('designer/setLayoutItemLeftAndTopOffset',
-                {
-                  id: this.$store.state.designer.currentSelectLayoutItemId,
-                  direction: 'left',
-                  offset: +this.layout.layoutConfigData.dragPixel
-                });
-            }
+          if(this.$store.state.designer.currentSelectLayoutItemId) {
+            this.$store.commit('designer/setLayoutItemLeftAndTopOffset',
+              {
+                id: this.$store.state.designer.currentSelectLayoutItemId,
+                direction: 'left',
+                offset: +this.layout.layoutConfigData.dragPixel
+              });
           }
         } else if (direction == 'bottom') {
-          if(this.$store.state.designer.currentSelectLayoutItemIds.length > 0) {
-            this.$store.state.designer.currentSelectLayoutItemIds.forEach((id)=>{
-              this.$store.commit('designer/setLayoutItemLeftAndTopOffset',
-                {
-                  id: id,
-                  direction: 'top',
-                  offset: +this.layout.layoutConfigData.dragPixel
-                });
-            })
-          }else {
-            if(this.$store.state.designer.currentSelectLayoutItemId) {
-              this.$store.commit('designer/setLayoutItemLeftAndTopOffset',
-                {
-                  id: this.$store.state.designer.currentSelectLayoutItemId,
-                  direction: 'top',
-                  offset: +this.layout.layoutConfigData.dragPixel
-                });
-            }
+          if(this.$store.state.designer.currentSelectLayoutItemId) {
+            this.$store.commit('designer/setLayoutItemLeftAndTopOffset',
+              {
+                id: this.$store.state.designer.currentSelectLayoutItemId,
+                direction: 'top',
+                offset: +this.layout.layoutConfigData.dragPixel
+              });
           }
         }
 
@@ -430,27 +349,6 @@
                 ids.pushNoRepeat(item.id)
               }
             });
-            _this.$store.commit('designer/setCurrentSelectLayoutItemIds', ids)
-          }
-
-          if(_this.$PnUtil.isMac()) {
-            if(e.keyCode == 91) { // Command键
-              _this.keepCtrl = true;
-              if(_this.tmpCurrentSelectLayoutItemId) {
-                let tmpIds = _this.currentSelectLayoutItemIds.concat();
-                tmpIds.pushNoRepeat(_this.tmpCurrentSelectLayoutItemId);
-                _this.$store.commit('designer/setCurrentSelectLayoutItemIds', tmpIds)
-              }
-            }
-          }else if(_this.$PnUtil.isWindows()) {
-            if(e.keyCode == 17) { // Ctrl键
-              _this.keepCtrl = true;
-              if(_this.tmpCurrentSelectLayoutItemId) {
-                let tmpIds = _this.currentSelectLayoutItemIds.concat();
-                tmpIds.pushNoRepeat(_this.tmpCurrentSelectLayoutItemId);
-                _this.$store.commit('designer/setCurrentSelectLayoutItemIds', tmpIds)
-              }
-            }
           }
 
           if (e.keyCode == 37) { // 方向左键
@@ -625,7 +523,6 @@
           this.$store.commit('designer/setRightSidebarLayoutItemConfigFormName', '');
           this.$store.commit('designer/setRightSidebarFuncCompConfigFormName', '');
           this.$store.commit('designer/setCurrentSelectLayoutItemId', '');
-          this.$store.commit('designer/setCurrentSelectLayoutItemIds', []);
         }
       },
 
@@ -641,29 +538,6 @@
 
         this.$refs.contextmenu.hide();
 
-        // 判断当前是否按住了ctrl按键 或 alt按键
-        if(this.keepCtrl || this.keepSelectable) {
-          let selectLayoutItemIds = this.currentSelectLayoutItemIds.concat();
-
-          if(selectLayoutItemIds.indexOf(layoutItem.id) > -1) {
-            for (let i=0; i<selectLayoutItemIds.length; i++) {
-              if(layoutItem.id == selectLayoutItemIds[i]) {
-                if(selectLayoutItemIds.length > 1) {
-                  selectLayoutItemIds.splice(i, 1);
-                  i--
-                }
-              }
-            }
-          }else {
-            selectLayoutItemIds.pushNoRepeat(layoutItem.id);
-          }
-          this.$store.commit('designer/setCurrentSelectLayoutItemIds', selectLayoutItemIds);
-        } else {
-          if(this.$store.state.designer.currentSelectLayoutItemIds.indexOf(layoutItem.id) == -1) {
-            this.$store.commit('designer/setCurrentSelectLayoutItemIds', []) // 清除ctrl选中的布局块
-          }
-        }
-
       },
 
       buildLayoutClassObj (layout) {
@@ -676,24 +550,13 @@
 
       buildLayoutItemClassObj (layoutItem) {
 
-        if (this.$store.state.designer.currentSelectLayoutItemIds.length > 0) {
-          if (this.$store.state.designer.currentSelectLayoutItemIds.indexOf(layoutItem.id) > -1 &&
-            this.$PnUtil.getContrastYIQ(this.layout.layoutConfigData.backgroundColor.substring(1,7)) == 'black') {
-            return 'activeBlack'
-          }
-          if (this.$store.state.designer.currentSelectLayoutItemIds.indexOf(layoutItem.id) > -1 &&
-            this.$PnUtil.getContrastYIQ(this.layout.layoutConfigData.backgroundColor.substring(1,7)) == 'white') {
-            return 'activeWhite'
-          }
-        }else {
-          if (this.$store.state.designer.currentSelectLayoutItemId == layoutItem.id &&
-            this.$PnUtil.getContrastYIQ(this.layout.layoutConfigData.backgroundColor.substring(1,7)) == 'black') {
-            return 'activeBlack'
-          }
-          if (this.$store.state.designer.currentSelectLayoutItemId == layoutItem.id &&
-            this.$PnUtil.getContrastYIQ(this.layout.layoutConfigData.backgroundColor.substring(1,7)) == 'white') {
-            return 'activeWhite'
-          }
+        if (this.$store.state.designer.currentSelectLayoutItemId == layoutItem.id &&
+          this.$PnUtil.getContrastYIQ(this.layout.layoutConfigData.backgroundColor.substring(1,7)) == 'black') {
+          return 'activeBlack'
+        }
+        if (this.$store.state.designer.currentSelectLayoutItemId == layoutItem.id &&
+          this.$PnUtil.getContrastYIQ(this.layout.layoutConfigData.backgroundColor.substring(1,7)) == 'white') {
+          return 'activeWhite'
         }
 
         if (this.$store.state.designer.currentHoverLayoutItemId == layoutItem.id) {
@@ -724,7 +587,6 @@
       ...mapFields({
         layout: 'pageMetadata.layout',
         currentSelectLayoutItemId: 'currentSelectLayoutItemId',
-        currentSelectLayoutItemIds: 'currentSelectLayoutItemIds',
         canvasEnabled: 'canvasEnabled'
       })
     },

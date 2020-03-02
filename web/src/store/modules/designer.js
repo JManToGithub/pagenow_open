@@ -23,8 +23,6 @@ const state = {
 
   rightSidebarFuncCompConfigFormName: '',   // 右侧边栏组件编辑区表单名称
 
-  currentSelectLayoutItemIds: [],           // 当前选中的多个布局块的ID数组
-
   currentHoverLayoutItemId: '',             // 当前滑入的布局块ID
 
   canvasEnabled: true,                      // 画布激活状态
@@ -135,8 +133,6 @@ const mutations = {
    */
   resetDesigner (state) {
     state.rightSidebarLayoutItemConfigFormName = '';
-    state.currentSelectLayoutItemId = '';
-    state.currentSelectLayoutItemIds = [];
     state.rightSidebarFuncCompConfigFormName = '';
     state.pageMetadata.layout.layoutItems = [];
   },
@@ -305,15 +301,6 @@ const mutations = {
    */
   setRightSidebarFuncCompConfigFormName (state, payload) {
     state.rightSidebarFuncCompConfigFormName = payload
-  },
-
-  /**
-   * 设置 当前选中的多个布局块的ID数组
-   * @param state
-   * @param layoutItemIds 一个存储布局块ID字符串的数组
-   */
-  setCurrentSelectLayoutItemIds (state, layoutItemIds) {
-    state.currentSelectLayoutItemIds = layoutItemIds
   },
 
   /**
