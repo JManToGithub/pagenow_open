@@ -90,7 +90,7 @@ java -version
 ![输入图片说明](https://images.gitee.com/uploads/images/2020/0227/213040_03f352e9_145187.png "WX20200227-212347@2x.png")
 
 - application.properties配置文件主要配置一些系统运行环境变量，例如文件上传目录等，文件中都有相关备注，按照您的系统环境自行配置即可
-![输入图片说明](https://images.gitee.com/uploads/images/2020/0227/213144_2abef145_145187.png "WX20200227-212425@2x.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2020/0302/201433_a4ed48d4_145187.png "WX20200302-201331@2x.png")
 
 - 修改完相关配置之后，cmd进入jar包所在根目录，运行如下命令：
 
