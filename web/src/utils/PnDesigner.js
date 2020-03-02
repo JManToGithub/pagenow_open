@@ -129,7 +129,6 @@ const buildFuncCompDatasourceField = function (customObj = {}) {
 
     ds_linkageUrlParams: [],
 
-    ds_useHttpServerProxy: false, // 是否使用服务器代理调用
   };
   dsFieldObj = PnUtil.deepMerge(dsFieldObj, customObj);
   return dsFieldObj

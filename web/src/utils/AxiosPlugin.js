@@ -57,18 +57,7 @@ Axios.interceptors.response.use(res => {
 }, error => {
   LoadingBar.error();
 
-  if(error.response.status === 401) {
-    // 401 说明 token 验证失败
-    // 可以直接跳转到登录页面，重新登录获取 token
-
-    Message.error(error.response.data.message);
-    localStorage.removeItem('token');
-    localStorage.removeItem('current_user');
-    router.replace({
-      path: '/login'
-    })
-
-  } else if (error.response.status === 403) {
+  if (error.response.status === 403) {
 
     Message.error(error.response.data.message);
 

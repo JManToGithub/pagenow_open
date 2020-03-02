@@ -223,16 +223,6 @@ const mutations = {
   },
 
   /**
-   * 设置布局块的层级zIndex
-   * @param state
-   * @param payload
-   */
-  setLayoutItemZIndex (state, payload) {
-    let obj = state.pageMetadata.layout.layoutItems.find(o=>o.id==payload.id);
-    obj.layoutItemConfigData.zIndex = payload.zIndex;
-  },
-
-  /**
    * 设置布局块的宽度和高度
    * @param state
    * @param payload
@@ -241,52 +231,6 @@ const mutations = {
     let obj = state.pageMetadata.layout.layoutItems.find(o=>o.id==payload.id);
     obj.layoutItemConfigData.width = payload.width;
     obj.layoutItemConfigData.height = payload.height;
-  },
-
-  /**
-   * 设置布局块的宽度、高度、左偏移、右偏移
-   * @param state
-   * @param payload
-   */
-  setLayoutItemWhlt (state, payload) {
-    let obj = state.pageMetadata.layout.layoutItems.find(o=>o.id==payload.id);
-    obj.layoutItemConfigData.width = payload.width;
-    obj.layoutItemConfigData.height = payload.height;
-    obj.layoutItemConfigData.left = payload.left;
-    obj.layoutItemConfigData.top = payload.top;
-  },
-
-  /**
-   * 设置布局块的显示隐藏
-   * @param state
-   * @param payload
-   */
-  setLayoutItemDisplay (state, payload) {
-    let obj = state.pageMetadata.layout.layoutItems.find(o=>o.id==payload.id);
-    obj.layoutItemConfigData.display = payload.display
-  },
-
-  /**
-   * 设置布局块是否允许拖拽
-   * @param state
-   * @param payload
-   */
-  setLayoutItemDraggableEnabled (state, payload) {
-    let obj = state.pageMetadata.layout.layoutItems.find(o=>o.id==payload.id);
-    obj.layoutItemConfigData.draggableEnabled = payload.draggableEnabled
-  },
-
-  /**
-   * 设置布局块过渡动画相关配置
-   * @param state
-   * @param payload
-   */
-  setLayoutItemAnimationSetting (state, payload) {
-    let obj = state.pageMetadata.layout.layoutItems.find(o=>o.id==payload.id);
-    obj.layoutItemConfigData.animationVisible = payload.animationVisible;
-    obj.layoutItemConfigData.animationDelay = payload.animationDelay;
-    obj.layoutItemConfigData.inAnimation = payload.inAnimation;
-    obj.layoutItemConfigData.outAnimation = payload.outAnimation;
   },
 
   /**
@@ -350,26 +294,6 @@ const mutations = {
     state.currentSelectLayoutItemId = layoutItemId;
   },
 
-  /**
-   * 设置当前滑入的布局块ID
-   * @param state
-   * @param layoutItemId
-   */
-  setCurrentHoverLayoutItemId (state, layoutItemId) {
-    state.currentHoverLayoutItemId = layoutItemId;
-  },
-
-  /**
-   * 设置所有布局块是否可拖拽配置
-   * @param state
-   * @param enabled
-   */
-  setAllLayoutItemDraggableEnabled (state, payload) {
-    state.pageMetadata.layout.layoutItems.forEach(layoutItem => {
-      layoutItem.layoutItemConfigData.draggableEnabled = payload.enabled
-    })
-  },
-
   updateLayoutItem (state, field) {
     updateField(state.pageMetadata.layout.layoutItems.find(o=>o.id==state.currentSelectLayoutItemId), field);
   },
@@ -381,16 +305,6 @@ const mutations = {
    */
   setRightSidebarFuncCompConfigFormName (state, payload) {
     state.rightSidebarFuncCompConfigFormName = payload
-  },
-
-
-  /**
-   * 添加 当前选中的多个布局块的ID数组 项
-   * @param state
-   * @param layoutItemId
-   */
-  addIdToCurrentSelectLayoutItemIds (state, layoutItemId) {
-    state.currentSelectLayoutItemIds.pushNoRepeat(layoutItemId)
   },
 
   /**

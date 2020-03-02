@@ -28,7 +28,6 @@
           <TimelineItem>
             <p class="time-line-item-label">接口地址</p>
             <Input v-model="apiPathData" type="textarea" :rows="4" placeholder="例：http://api?param=:param" @on-blur="updateApiPath"/>
-            <Checkbox class="m-t-5px m-b-5px" v-model="ds_useHttpServerProxy">服务器代理请求（因跨域无法请求时使用）</Checkbox>
 
             <!--URL联动参数配置-->
             <Alert class="m-t-5px" v-show="linkageUrlParamsFormData.items.length == 0" type="info" show-icon>
@@ -181,20 +180,11 @@
           this.invokeError = true;
           this.resultObjData = JSON.stringify(error, null, 2)
         };
-        // 判断是否使用服务器代理调用
-        if (this.ds_useHttpServerProxy) {
-          this.$PnApi.HttpProxyApi.httpGet(this.$PnUtil.buildApiPath(this.apiPathData, this.ds_linkageUrlParams)).then(result => {
-            successHandler(result.data)
-          }).catch(error => {
-            errorHandler(error)
-          })
-        }else {
-          this.$PnApi.getData(this.$PnUtil.buildApiPath(this.apiPathData, this.ds_linkageUrlParams)).then(result=>{
-            successHandler(result.data)
-          }).catch(error=>{
-            errorHandler(error)
-          })
-        }
+        this.$PnApi.getData(this.$PnUtil.buildApiPath(this.apiPathData, this.ds_linkageUrlParams)).then(result=>{
+          successHandler(result.data)
+        }).catch(error=>{
+          errorHandler(error)
+        })
       },
 
       /*****************URL联动参数配置相关操作****************/
@@ -252,8 +242,6 @@
         ds_resultObj: 'component.compConfigData.ds_resultObj',
 
         ds_linkageUrlParams: 'component.compConfigData.ds_linkageUrlParams',
-
-        ds_useHttpServerProxy: 'component.compConfigData.ds_useHttpServerProxy',
 
       }),
 

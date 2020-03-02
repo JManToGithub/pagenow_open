@@ -30,21 +30,12 @@ const FuncCompMixin = {
      */
     initDatasource (_staticCallback, _dynamicCallback) {
       if(this.component.compConfigData.ds_type == 'api' && this.component.compConfigData.ds_apiPath) {
-        if (this.component.compConfigData.ds_useHttpServerProxy) {
-          this.$PnApi.HttpProxyApi.httpGet(this.$PnUtil.buildApiPath(
-            this.component.compConfigData.ds_apiPath,
-            this.component.compConfigData.ds_linkageUrlParams)
-          ).then(result=>{
-            _dynamicCallback(result)
-          })
-        }else {
-          this.$PnApi.getData(this.$PnUtil.buildApiPath(
-            this.component.compConfigData.ds_apiPath,
-            this.component.compConfigData.ds_linkageUrlParams)
-          ).then(result=>{
-            _dynamicCallback(result)
-          })
-        }
+        this.$PnApi.getData(this.$PnUtil.buildApiPath(
+          this.component.compConfigData.ds_apiPath,
+          this.component.compConfigData.ds_linkageUrlParams)
+        ).then(result=>{
+          _dynamicCallback(result)
+        })
       }else {
         _staticCallback()
       }

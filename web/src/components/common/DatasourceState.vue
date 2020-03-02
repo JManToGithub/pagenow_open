@@ -10,7 +10,7 @@
         </TimelineItem>
 
         <TimelineItem v-show="ds_type == 'api'">
-          <p>接口地址 <Tag color="cyan" v-show="ds_useHttpServerProxy">服务器代理调用</Tag></p>
+          <p>接口地址</p>
           <Alert class="m-t-5px m-b-5px" :type="ds_apiPath ? 'info': 'warning'" :style="{padding: '10px 10px 10px 10px'}">
             <p>{{ds_apiPath ? ds_apiPath : '未配置接口地址，默认使用上一次结果集数据'}}</p>
           </Alert>
@@ -74,21 +74,12 @@
     methods: {
       invokeApiPath () {
         if(this.ds_type == 'api' && this.ds_apiPath) {
-          if (this.ds_useHttpServerProxy) {
-            this.$PnApi.HttpProxyApi.httpGet(this.$PnUtil.buildApiPath(this.ds_apiPath, this.ds_linkageUrlParams)).then(result=>{
-              this.errorAlertVisible = false
-            }).catch(error=>{
-              this.errorAlertVisible = true;
-              this.errorMsg = JSON.stringify(error, null, 2)
-            })
-          }else {
-            this.$PnApi.getData(this.$PnUtil.buildApiPath(this.ds_apiPath, this.ds_linkageUrlParams)).then(result=>{
-              this.errorAlertVisible = false
-            }).catch(error=>{
-              this.errorAlertVisible = true;
-              this.errorMsg = JSON.stringify(error, null, 2)
-            })
-          }
+          this.$PnApi.getData(this.$PnUtil.buildApiPath(this.ds_apiPath, this.ds_linkageUrlParams)).then(result=>{
+            this.errorAlertVisible = false
+          }).catch(error=>{
+            this.errorAlertVisible = true;
+            this.errorMsg = JSON.stringify(error, null, 2)
+          })
         }
       },
     },
@@ -101,8 +92,6 @@
         ds_resultObj: 'component.compConfigData.ds_resultObj',
 
         ds_linkageUrlParams: 'component.compConfigData.ds_linkageUrlParams',
-
-        ds_useHttpServerProxy: 'component.compConfigData.ds_useHttpServerProxy',
 
       }),
     },

@@ -6,20 +6,6 @@
           <h2 class="color-white">PageNow数据可视化开发平台_开源基础版</h2>
 
         </Menu>
-        <div style="float: right;">
-
-          <Dropdown class="m-r-5px" placement="bottom-start" trigger="click" @on-click="userDropdownClickHandle">
-            <Button type="primary">
-              <Icon type="ios-contact" size="17"/> {{$PnUtil.getCurrentUser().username}}
-              <Icon type="arrow-down-b"></Icon>
-            </Button>
-            <DropdownMenu slot="list">
-              <DropdownItem name="changePwd">修改密码</DropdownItem>
-              <DropdownItem name="logout">退出系统</DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
-
-        </div>
 
       </Header>
 
@@ -34,7 +20,6 @@
               <MenuItem name="ProjectManage" to="/admin/project_manage">我的工程</MenuItem>
               <MenuItem v-permission name="CompinfoManage" to="/admin/compinfo_manage">组件信息库管理</MenuItem>
               <MenuItem name="EchartThemeManage" to="/admin/echart_theme_manage">图表主题管理</MenuItem>
-              <MenuItem v-permission name="UserManage" to="/admin/user_manage">用户管理</MenuItem>
             </Submenu>
 
           </Menu>
@@ -47,20 +32,16 @@
       </Layout>
     </Layout>
 
-    <ChangePasswordModal :show="changePwdModalVisible"
-                         @cancel="changePwdModalVisible = false"></ChangePasswordModal>
-
   </div>
 
 </template>
 
 <script>
   import Vue from 'vue'
-  import ChangePasswordModal from "./components/admin/user/ChangePasswordModal";
 
   export default {
     name: 'Admin',
-    components: {ChangePasswordModal},
+
     data() {
       return {
         currentLanguage: "",
@@ -79,35 +60,7 @@
       this.menuActiveName = this.$route.name;
     },
     methods: {
-      changeLanguage: function(key) {
-        Vue.config.lang = key;
-        this.currentLanguage = this.language[key];
-        localStorage.setItem('language', key);
-      },
 
-      userDropdownClickHandle (name) {
-        if (name == 'logout') {
-          this.logout();
-        }else if (name == 'changePwd') {
-          this.changePwdModalVisible = !this.changePwdModalVisible
-        }
-      },
-
-      logout: function () {
-        this.$Modal.confirm({
-          title: '提醒',
-          content: '确认要退出系统吗？',
-          onOk: () => {
-
-            this.$PnApi.AuthApi.logout(localStorage.getItem('token')).then(result => {
-              localStorage.removeItem('token');
-              localStorage.removeItem('current_user');
-              this.$router.push('/login')
-            });
-
-          }
-        });
-      }
     },
     computed: {}
   }
