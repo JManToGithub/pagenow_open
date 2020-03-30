@@ -3,7 +3,7 @@
 ### 介绍
 基于SprigBoot+Vue构建的数据可视化开发平台，灵活的拖拽式布局、支持多种数据源、丰富的通用组件，帮助您快速的构建与迭代数据大屏页面。
 
-官方网站：[PageNow官网](http://www.pagenow.cn)
+官方网站：[PageNow官网](http://pagenow.cn)
 
 演示地址（演示系统为企业版本，开源版删减了部分功能）：[http://139.9.101.78:8080/pagenow/login](http://139.9.101.78:8080/pagenow/login) 演示用户账号：user/123
 
