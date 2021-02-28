@@ -50,18 +50,3 @@ Vue.directive('clipboard', {
     delete el.__clipboard__
   }
 });
-
-Vue.directive('permission', {
-  inserted(el, binding, vnode) {
-
-    let currentUser = JSON.parse(localStorage.getItem('current_user'));
-    if (currentUser) {
-      if (currentUser.role.rolecode !== '001') {
-        el.parentNode.removeChild(el);
-      }
-    }else {
-      el.parentNode.removeChild(el);
-    }
-
-  }
-});

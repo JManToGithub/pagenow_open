@@ -18,7 +18,7 @@
                 管理
               </template>
               <MenuItem name="ProjectManage" to="/admin/project_manage">我的工程</MenuItem>
-              <MenuItem v-permission name="CompinfoManage" to="/admin/compinfo_manage">组件信息库管理</MenuItem>
+              <MenuItem name="CompinfoManage" to="/admin/compinfo_manage">组件信息库管理</MenuItem>
               <MenuItem name="EchartThemeManage" to="/admin/echart_theme_manage">图表主题管理</MenuItem>
             </Submenu>
 

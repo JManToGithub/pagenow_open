@@ -1,0 +1,22 @@
+Manifest-Version: 1.0
+Class-Path: spring-boot-2.1.6.RELEASE.jar snakeyaml-1.23.jar spring-bo
+ ot-starter-2.1.6.RELEASE.jar logback-core-1.2.3.jar jboss-logging-3.3
+ .2.Final.jar mysql-connector-java-8.0.16.jar spring-web-5.1.8.RELEASE
+ .jar log4j-to-slf4j-2.11.2.jar spring-jcl-5.1.8.RELEASE.jar jfinal-4.
+ 2.jar jackson-module-parameter-names-2.9.9.jar commons-fileupload-1.3
+ .1.jar jackson-databind-2.9.9.jar log4j-api-2.11.2.jar jackson-dataty
+ pe-jsr310-2.9.9.jar fastjson-1.2.7.jar spring-boot-devtools-2.1.6.REL
+ EASE.jar spring-boot-starter-json-2.1.6.RELEASE.jar jackson-datatype-
+ jdk8-2.9.9.jar spring-boot-autoconfigure-2.1.6.RELEASE.jar spring-con
+ text-5.1.8.RELEASE.jar spring-boot-starter-web-2.1.6.RELEASE.jar tomc
+ at-embed-el-9.0.21.jar validation-api-2.0.1.Final.jar spring-boot-sta
+ rter-logging-2.1.6.RELEASE.jar hibernate-validator-6.0.17.Final.jar s
+ pring-expression-5.1.8.RELEASE.jar javax.annotation-api-1.3.2.jar jul
+ -to-slf4j-1.7.26.jar spring-boot-starter-tomcat-2.1.6.RELEASE.jar spr
+ ing-webmvc-5.1.8.RELEASE.jar jackson-annotations-2.9.0.jar tomcat-emb
+ ed-websocket-9.0.21.jar logback-classic-1.2.3.jar classmate-1.4.0.jar
+  spring-core-5.1.8.RELEASE.jar commons-io-2.6.jar druid-1.1.18.jar sl
+ f4j-api-1.7.26.jar spring-aop-5.1.8.RELEASE.jar tomcat-embed-core-9.0
+ .21.jar spring-beans-5.1.8.RELEASE.jar jackson-core-2.9.9.jar
+Main-Class: com.pagenow.pagenow_serve.PagenowApplication
+
