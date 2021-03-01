@@ -144,7 +144,7 @@ yarn serve
 
 ![输入图片说明](https://images.gitee.com/uploads/images/2021/0228/233854_079a9e19_145187.png "WX20210228-233844.png")
 
-### 联系方式：
+### 联系方式
 
 官方客服QQ：354300651；
 
