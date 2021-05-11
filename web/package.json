@@ -21,7 +21,7 @@
     "js-md5": "^0.7.3",
     "jsencrypt": "^3.0.0-rc.1",
     "jsoneditor": "^6.3.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "v-contextmenu": "^2.8.1",
     "vue": "^2.6.10",
     "vue-async-computed": "^3.7.0",
