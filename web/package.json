@@ -20,7 +20,7 @@
     "jquery": "^3.4.1",
     "js-md5": "^0.7.3",
     "jsencrypt": "^3.0.0-rc.1",
-    "jsoneditor": "^6.3.0",
+    "jsoneditor": "^9.5.6",
     "lodash": "^4.17.15",
     "v-contextmenu": "^2.8.1",
     "vue": "^2.6.10",
